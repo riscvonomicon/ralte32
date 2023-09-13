@@ -423,11 +423,14 @@ macro_rules! impl_binhex {
                 let num = self.0;
 
                 for i in 0..<$t>::BITS / 8 {
-                    if i % 4 == 0 {
-                        b'_'.write(writer);
+                    if i != 0 && i % 4 == 0 {
+                        "_".write(writer);
                     }
 
-                    LUT[((num >> ((<$t>::BITS / 8 - i - 1)*4)) & 0xF) as usize].write(writer);
+                    let c = LUT[((num >> ((<$t>::BITS / 8 - i - 1)*4)) & 0xF) as usize];
+                    let c = char::from(c);
+
+                    c.write(writer);
                 }
             }
         }
@@ -437,14 +440,14 @@ macro_rules! impl_binhex {
                 let num = self.0;
 
                 for i in 0..<$t>::BITS {
-                    if i % 4 == 0 {
-                        b'_'.write(writer);
+                    if i != 0 && i % 4 == 0 {
+                        "_".write(writer);
                     }
 
                     let c = if (num >> (<$t>::BITS - i - 1)) & 1 == 1 {
-                        b'1'
+                        "1"
                     } else {
-                        b'0'
+                        "0"
                     };
 
                     c.write(writer);

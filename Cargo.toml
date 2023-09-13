@@ -2,7 +2,7 @@
 name = "ralte32"
 authors = ["Gijs Burghoorn <me@gburghoorn.com>"]
 description = "Arithmetic Library Testing Environment for embedded RISC-V 32-bit"
-version = "0.1.0"
+version = "0.1.1"
 
 edition = "2021"
 

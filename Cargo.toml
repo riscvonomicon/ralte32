@@ -2,11 +2,11 @@
 name = "ralte32"
 authors = ["Gijs Burghoorn <me@gburghoorn.com>"]
 description = "Arithmetic Library Testing Environment for embedded RISC-V 32-bit"
-version = "0.1.1"
+version = "0.1.2"
 
 edition = "2021"
 
-categories = ["development-tools", "development-tools:testing"]
+categories = ["development-tools", "embedded"]
 keywords = ["risc-v", "test", "rv32"]
 
 repository = "https://github.com/riscvonomicon/ralte32"

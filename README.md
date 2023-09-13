@@ -1,5 +1,7 @@
 # RALTE32
 
+[Crates.io](https://crates.io/crates/ralte32) | [Docs.rs](https://docs.rs/ralte32/latest/ralte32/) | [Repository](https://github.com/riscvonomicon/ralte32)
+
 A **R**ust **A**rithmetic **L**ibrary **T**esting **E**nvironment for embedded
 RISC-V **32**-bit. This libraries allows the testing of arithmetic Rust code
 made for [RISC-V] 32-bit using the [QEMU] simulator. This is especially useful

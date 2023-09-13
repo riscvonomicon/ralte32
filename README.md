@@ -68,7 +68,7 @@ fn test_remainder() {
 define_tests!{
     test_multiplication,
     test_remainder,
-};
+}
 ```
 
 This can then be ran with:

@@ -2,7 +2,7 @@
 #![cfg_attr(target_arch = "riscv32", no_std)]
 #![cfg_attr(target_arch = "riscv32", no_main)]
 
-use ralte32::{define_tests, assert_eq};
+use ralte32::{assert_eq, define_tests};
 
 fn test_multiplication() {
     assert_eq!(6 * 7, 42);

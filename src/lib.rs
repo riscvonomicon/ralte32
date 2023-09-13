@@ -162,7 +162,7 @@ macro_rules! assert_ne {
 
 #[macro_export]
 /// Print several items to the standard output.
-/// 
+///
 /// This is similar to [`std::print`], but is used without formatting. Instead, all items are
 /// specified sequentially.
 macro_rules! print {
@@ -176,7 +176,7 @@ macro_rules! print {
 
 #[macro_export]
 /// Print several items and a newline to the standard output.
-/// 
+///
 /// This is similar to [`std::println`], but is used without formatting. Instead, all items are
 /// specified sequentially.
 macro_rules! println {
@@ -191,7 +191,7 @@ macro_rules! println {
 
 #[macro_export]
 /// Print several items to the standard error.
-/// 
+///
 /// This is similar to [`std::eprint`], but is used without formatting. Instead, all items are
 /// specified sequentially.
 macro_rules! eprint {
@@ -205,7 +205,7 @@ macro_rules! eprint {
 
 #[macro_export]
 /// Print several items and a newline to the standard error.
-/// 
+///
 /// This is similar to [`std::eprintln`], but is used without formatting. Instead, all items are
 /// specified sequentially.
 macro_rules! eprintln {
@@ -394,7 +394,7 @@ impl Rv32Write for i128 {
             writer(b"-");
         }
 
-        (num.abs() as u128).write(writer);
+        num.unsigned_abs().write(writer);
     }
 }
 
@@ -472,7 +472,7 @@ pub mod buffered_writer {
             .checked_add(buf.len())
             .is_some_and(|value| value < PRINTBUF_CAPACITY)
         {
-            for (i, c) in buf.into_iter().enumerate() {
+            for (i, c) in buf.iter().enumerate() {
                 unsafe { PRINTBUF[current_len + i] = *c };
             }
             unsafe { PRINTBUF_LEN += buf.len() }

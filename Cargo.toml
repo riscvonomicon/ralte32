@@ -1,8 +1,16 @@
 [package]
 name = "ralte32"
+authors = ["Gijs Burghoorn <me@gburghoorn.com>"]
+description = "Arithmetic Library Testing Environment for embedded RISC-V 32-bit"
 version = "0.1.0"
+
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+categories = ["development-tools", "development-tools:testing"]
+keywords = ["risc-v", "test", "rv32"]
 
-[dependencies]
+repository = "https://github.com/riscvonomicon/ralte32"
+homepage = "https://github.com/riscvonomicon/ralte32"
+
+readme = "README.md"
+license = "MIT or APACHE"

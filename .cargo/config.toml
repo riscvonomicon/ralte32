@@ -1,3 +1,0 @@
-[target.riscv32imac-unknown-none-elf]
-rustflags = ['-Ctarget-feature=+crt-static']
-runner = "qemu-riscv32 -cpu rv32"

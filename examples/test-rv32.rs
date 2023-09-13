@@ -1,6 +1,6 @@
 // examples/test-rv32.rs
-#![no_std]
-#![no_main]
+#![cfg_attr(target_arch = "riscv32", no_std)]
+#![cfg_attr(target_arch = "riscv32", no_main)]
 
 use ralte32::{define_tests, assert_eq};
 

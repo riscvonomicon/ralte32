@@ -63,7 +63,7 @@
 //! define_tests!{
 //!     test_multiplication,
 //!     test_remainder,
-//! };
+//! }
 //! ```
 //!
 //! This can then be ran with:
@@ -98,7 +98,7 @@
 //! [QEMU]: https://www.qemu.org/
 //! [RISC-V]: https://en.wikipedia.org/wiki/RISC-V
 //! [Rust riscv32 intrinsics]: https://doc.rust-lang.org/nightly/core/arch/riscv32
-#![cfg_attr(not(doc), no_std)]
+#![cfg_attr(not(any(not(target_arch = "riscv32"), doc)), no_std)]
 
 #[macro_export]
 /// Assert whether an condition is true similar to [`core::assert`].
@@ -224,6 +224,7 @@ macro_rules! eprintln {
 /// This is the main entry into this crate.
 macro_rules! define_tests {
     ($($test_fn:ident),* $(,)?) => {
+        #[cfg(target_arch = "riscv32")]
         #[panic_handler]
         fn panic(info: &core::panic::PanicInfo) -> ! {
             $crate::eprintln!();
@@ -251,6 +252,7 @@ macro_rules! define_tests {
         }
 
         // Linux links against the `_start` function specifically.
+        #[cfg(target_arch = "riscv32")]
         #[no_mangle]
         pub extern "C" fn _start() -> ! {
             $crate::println!("Running tests...\n");
@@ -264,33 +266,59 @@ macro_rules! define_tests {
 
             $crate::syscall::exit(0)
         }
+
+        #[cfg(not(target_arch = "riscv32"))]
+        fn main() {
+            return;
+
+            #[allow(unreachable_code)]
+            {
+                $(
+                $test_fn();
+                )*
+            }
+        }
     };
 }
 
 /// Linux system calls used by this crate.
 pub mod syscall {
     #[inline]
-    pub fn write(file_descriptor: u32, buf: &[u8]) {
+    pub fn write(_file_descriptor: u32, _buf: &[u8]) {
+        #[cfg(target_arch = "riscv32")]
         unsafe {
             core::arch::asm!(
                 "ecall",
                 in ("a7") 64,
-                in ("a0") file_descriptor,
-                in ("a1") buf as *const [u8] as *const u8,
-                in ("a2") buf.len(),
+                in ("a0") _file_descriptor,
+                in ("a1") _buf as *const [u8] as *const u8,
+                in ("a2") _buf.len(),
             );
+        }
+
+        #[cfg(not(target_arch = "riscv32"))]
+        {
+            // Failed to write. Not running on RISC-V 32
+            std::process::abort();
         }
     }
 
     #[inline]
-    pub fn exit(status_code: u32) -> ! {
+    pub fn exit(_status_code: u32) -> ! {
+        #[cfg(target_arch = "riscv32")]
         unsafe {
             core::arch::asm!(
                 "ecall",
                 in ("a7") 93,
-                in ("a0") status_code,
+                in ("a0") _status_code,
                 options (noreturn)
             );
+        }
+
+        #[cfg(not(target_arch = "riscv32"))]
+        {
+            // Failed to exit. Not running on RISC-V 32
+            std::process::abort();
         }
     }
 }

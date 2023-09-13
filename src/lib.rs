@@ -324,9 +324,9 @@ pub mod syscall {
 }
 
 /// Wrapper type to format a unsigned integer with hexadecimal
-pub struct Hex<T>(T);
+pub struct Hex<T>(pub T);
 /// Wrapper type to format a unsigned integer with binary
-pub struct Binary<T>(T);
+pub struct Binary<T>(pub T);
 
 fn write_stdout(buf: &[u8]) {
     syscall::write(1, buf)

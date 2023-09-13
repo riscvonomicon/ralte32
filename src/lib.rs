@@ -422,12 +422,12 @@ macro_rules! impl_binhex {
             fn write(&self, writer: fn(&[u8])) {
                 let num = self.0;
 
-                for i in 0..<$t>::BITS / 8 {
+                for i in 0..<$t>::BITS / 4 {
                     if i != 0 && i % 4 == 0 {
                         "_".write(writer);
                     }
 
-                    let c = LUT[((num >> ((<$t>::BITS / 8 - i - 1)*4)) & 0xF) as usize];
+                    let c = LUT[((num >> ((<$t>::BITS / 4 - i - 1)*4)) & 0xF) as usize];
                     let c = char::from(c);
 
                     c.write(writer);

@@ -13,4 +13,4 @@ repository = "https://github.com/riscvonomicon/ralte32"
 homepage = "https://github.com/riscvonomicon/ralte32"
 
 readme = "README.md"
-license = "MIT or APACHE"
+license = "MIT OR Apache-2.0"
